@@ -46,7 +46,7 @@ smallBlogWith conf = do
     ["favicon.ico"]           --> copy
     ["img/**", "images/**"]   --> copy
     ["static/**", "files/**"] --> copy
-    ["js/**"] --> copy
+    ["js/**", "javascript/**"] --> copy
 
     -- CSS files
     ["css/*.css", "style/*.css", "stylesheets/*.css"] --> css
