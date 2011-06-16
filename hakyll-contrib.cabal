@@ -1,0 +1,27 @@
+Name:                hakyll-contrib
+Version:             0.0.0.1
+Synopsis:            Extra modules for the hakyll website compiler
+Homepage:            http://jaspervdj.be/hakyll
+License:             BSD3
+License-file:        LICENSE
+Author:              Jasper Van der Jeugt <m@jaspervdj.be>
+Maintainer:          Jasper Van der Jeugt <m@jaspervdj.be>
+Category:            Web
+
+Cabal-version:       >=1.6
+Build-type:          Simple
+
+Source-Repository head
+  Type:     git
+  Location: git://github.com/jaspervdj/hakyll-contrib.git
+
+Library
+  Ghc-options:    -Wall
+  Hs-source-dirs: src
+  
+  Build-depends:
+    base   >= 4   && < 5,
+    hakyll >= 3.2 && < 3.3
+
+  Exposed-modules:
+    Hakyll.Contrib.SmallBlog
