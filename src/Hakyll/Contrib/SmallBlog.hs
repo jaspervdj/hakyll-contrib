@@ -9,7 +9,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 module Hakyll.Contrib.SmallBlog
-    ( SmallBlogConfiguration
+    ( SmallBlogConfiguration (..)
     , defaultSmallBlogConfiguration
     , smallBlog
     , smallBlogWith
@@ -30,6 +30,8 @@ data SmallBlogConfiguration = SmallBlogConfiguration
       parserState         :: ParserState
     , -- | Writer options for pandoc
       writerOptions       :: WriterOptions
+    , -- | Atom feed configuration
+      atomFeed            :: Maybe FeedConfiguration
     } deriving (Show)
 
 -- | Defaults for 'SmallBlogConfiguration'
@@ -39,6 +41,7 @@ defaultSmallBlogConfiguration = SmallBlogConfiguration
     { numberOfRecentPosts = 3
     , parserState         = defaultHakyllParserState
     , writerOptions       = defaultHakyllWriterOptions
+    , atomFeed            = Nothing
     }
 
 -- | A default configuration for a small blog
@@ -67,6 +70,14 @@ smallBlogWith conf = do
 
     -- Top-level pages
     ["*.markdown", "*.html", "*.rst", "*.lhs"] --> topLevel
+
+    -- Rss is optional
+    case atomFeed conf of
+        Nothing -> return ()
+        Just f  -> do
+            match  "atom.xml" $ route idRoute
+            create "atom.xml" $ requireAll_ "posts/*" >>> renderAtom f
+            return ()
   where
     -- Useful combinator here
     xs --> f = mapM_ (\p -> match p $ f) xs
