@@ -17,6 +17,8 @@ module Hakyll.Contrib.SmallBlog
 
 import Control.Arrow ((>>>))
 
+import Text.Pandoc (ParserState, WriterOptions)
+
 import Hakyll
 
 -- | Configuration datatype for the 'smallBlog' ruleset
@@ -24,6 +26,10 @@ import Hakyll
 data SmallBlogConfiguration = SmallBlogConfiguration
     { -- | Number of recent posts that are available
       numberOfRecentPosts :: Int
+    , -- | Parser state for pandoc, i.e. read options
+      parserState         :: ParserState
+    , -- | Writer options for pandoc
+      writerOptions       :: WriterOptions
     } deriving (Show)
 
 -- | Defaults for 'SmallBlogConfiguration'
@@ -31,6 +37,8 @@ data SmallBlogConfiguration = SmallBlogConfiguration
 defaultSmallBlogConfiguration :: SmallBlogConfiguration
 defaultSmallBlogConfiguration = SmallBlogConfiguration
     { numberOfRecentPosts = 3
+    , parserState         = defaultHakyllParserState
+    , writerOptions       = defaultHakyllWriterOptions
     }
 
 -- | A default configuration for a small blog
@@ -75,7 +83,7 @@ smallBlogWith conf = do
     -- Posts
     post = do
         route $ setExtension "html"
-        compile $ pageCompiler
+        compile $ pageCompilerWith (parserState conf) (writerOptions conf)
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
             >>> relativizeUrlsCompiler
@@ -83,8 +91,8 @@ smallBlogWith conf = do
     -- Top-level pages
     topLevel = do
         route $ setExtension "html"
-        compile $ pageCompilerWithFields defaultHakyllParserState
-            defaultHakyllWriterOptions id topLevelFields
+        compile $ pageCompilerWithFields (parserState conf)
+            (writerOptions conf) id topLevelFields
                 >>> applyTemplateCompiler "templates/default.html"
                 >>> relativizeUrlsCompiler
 
