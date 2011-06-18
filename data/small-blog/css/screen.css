@@ -1,0 +1,55 @@
+html {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 14px;
+    color: black;
+}
+
+body {
+    width: 600px;
+    margin: 10px auto 10px auto;
+}
+
+div#header {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div#navigation {
+    float: right;
+}
+
+div#navigation a {
+    margin-left: 10px;
+}
+
+div#footer {
+    text-align: center;
+    font-style: italic;
+    font-size: 11px;
+    margin-top: 30px;
+}
+
+h1 {
+    color: rgb(150, 150, 150);
+    border-bottom: 2px solid rgb(150, 150, 150);
+    font-size: 22px;
+    margin-top: 30px;
+}
+
+li {
+    list-style-type: square;
+}
+
+a {
+    color: rgb(30, 30, 130);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div.figure {
+    text-align: center;
+}
+
+div.figure p.caption {
+    font-style: italic;
+}
