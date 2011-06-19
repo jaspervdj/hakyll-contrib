@@ -1,10 +1,81 @@
 -- | This module provides a simple default configuration which behaves similar
--- to the Jekyll static site generator.
---
--- <http://jekyllrb.com/>
+-- to a tool such as the Jekyll static site generator (<http://jekyllrb.com/>).
 --
 -- The idea is that you don't have to write your configuration yourself: you
 -- just follow some conventions, and Hakyll does the rest.
+--
+-- You can generate a site which will serve as a good starting point by running
+-- the command-line tool:
+--
+-- > hakyll-contrib small-blog
+--
+-- Hakyll will then generate a simple example site for you. The necessary
+-- configuration is placed in the @hakyll.hs@ file. Compile and run it to create
+-- the demo site:
+--
+-- > ghc --make hakyll.hs
+-- > ./hakyll build
+-- > ./hakyll preview
+--
+-- So, in order to get your site going, you need to follow the conventions for
+-- the content on your site.
+--
+-- Images should be placed in the @images\/@ or @img\/@ folder. The are copied
+-- directly. Other static files (but not images) can be placed in @static\/@ or
+-- @files\/@. The @favicon.ico@ file is an exception, it is just placed in the
+-- top-level directory.
+--
+-- CSS files should be placed in @css\/@, and JavaScript files in @js\/@.
+--
+-- Then, we arrive at pages. You can create any number of pages on your site:
+-- just create files in one of the documents pandoc supports (@.html@,
+-- @.markdown@, @.rst@, @.lhs@...) in the top-level directory.
+--
+-- These pages may use a number of preconfigured @$key$@'s:
+--
+-- * @$recentPosts$@: A list of recent posts, displayed from most recent to
+--   oldest. By default, 3 posts are shown, altough this can be configured using
+--   the 'numberOfRecentPosts' field.
+--
+-- * @$allPosts$@: A list of all posts, displayed from most recent to oldest.
+--   This is very useful for creating an archive page.
+--
+-- * @$chronologicalPosts$@: Similar to @$allPosts$@, but displays the posts in
+--   chronological order.
+--
+-- For example usage, look at the example site we generated using
+-- @hakyll-contrib small-blog@.
+--
+-- Now, one can wonder where these posts come from. Simple: all pages in the
+-- @posts\/@ directory are considered posts. Note that a naming format of
+--
+-- > posts/year-month-date-title.extension
+--
+-- is mandatory. An example:
+--
+-- > posts/2011-06-19-hello-world.markdown
+--
+-- This allows Hakyll to parse the date easily, among other things. Again, look
+-- at the example site for some example posts.
+--
+-- Additionaly, there is the @templates\/@ folder. This folder holds the
+-- templates for your site. For a @small-blog@ configuration, your site should
+-- have /exactly/ three templates:
+--
+-- * @templates\/default.html@: The main template. This should contain your
+--   HTML doctype, head, etc.
+--
+-- * @templates\/post.html@: A template which is applied to every post before
+--   it is rendered using the default template.
+--
+-- * @templates\/post-item.html@: A template which is applied to posts in
+--   listings (e.g. @$chronologicalPosts$@).
+--
+-- Again, the example should clarify things.
+--
+-- This configuration should be enough to create a small personal website. But,
+-- we have only touched the surface of what is possible with Hakyll. For more
+-- information, check out the tutorials at: <http://jaspervdj.be/hakyll>
 --
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
