@@ -1,5 +1,5 @@
 Name:                hakyll-contrib
-Version:             0.0.0.2
+Version:             0.0.0.3
 Synopsis:            Extra modules for the hakyll website compiler
 Homepage:            http://jaspervdj.be/hakyll
 License:             BSD3
@@ -15,7 +15,7 @@ Data-dir:            data
 Data-files:
   small-blog/contact.markdown
   small-blog/css/screen.css
-  small-blog/hakyll.hs
+  small-blog/small-blog.hs
   small-blog/images/haskell-logo.png
   small-blog/index.markdown
   small-blog/posts.html
