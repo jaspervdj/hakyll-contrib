@@ -10,12 +10,12 @@
 -- > hakyll-contrib small-blog
 --
 -- Hakyll will then generate a simple example site for you. The necessary
--- configuration is placed in the @hakyll.hs@ file. Compile and run it to create
+-- configuration is placed in the @small-blog.hs@ file. Compile and run it to create
 -- the demo site:
 --
--- > ghc --make hakyll.hs
--- > ./hakyll build
--- > ./hakyll preview
+-- > ghc --make small-blog.hs
+-- > ./small-blog build
+-- > ./small-blog preview
 --
 -- So, in order to get your site going, you need to follow the conventions for
 -- the content on your site.
