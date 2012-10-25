@@ -125,9 +125,9 @@ smallBlog = smallBlogWith defaultSmallBlogConfiguration
 smallBlogWith :: SmallBlogConfiguration -> Rules
 smallBlogWith conf = do
     -- Images and static files
-    ["favicon.ico"]           --> copy
-    ["img/**", "images/**"]   --> copy
-    ["static/**", "files/**"] --> copy
+    ["favicon.ico"]            --> copy
+    ["img/**", "images/**"]    --> copy
+    ["static/**", "files/**"]  --> copy
     ["js/**", "javascript/**"] --> copy
 
     -- CSS files
@@ -140,7 +140,7 @@ smallBlogWith conf = do
     ["posts/*"] --> post
 
     -- Top-level pages
-    ["*.markdown", "*.html", "*.rst", "*.lhs"] --> topLevel
+    ["*.markdown", "*.md", "*.html", "*.rst", "*.lhs"] --> topLevel
 
     -- Rss is optional
     case atomFeed conf of
